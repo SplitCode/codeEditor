@@ -5,7 +5,13 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "typecheck": "tsc --noEmit",
+    "lint": "nx lint",
+    "format:check": "prettier --check .",
+    "format": "prettier --write .",
+    "stylelint": "stylelint 'src/**/*.less'",
+    "stylelint:fix": "stylelint --fix 'src/**/*.less'"
   },
   "private": true,
   "dependencies": {
@@ -72,6 +78,10 @@
     "tslib": "^2.3.0",
     "typescript": "~5.6.2"
   },
+  "engines": {
+    "node": ">= 18.0.0",
+    "npm": ">= 10"
+},
   "nx": {
     "includedScripts": []
   }
