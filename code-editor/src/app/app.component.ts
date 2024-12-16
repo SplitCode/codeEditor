@@ -1,16 +1,28 @@
-import { NgDompurifySanitizer } from "@tinkoff/ng-dompurify";
-import { TuiRootModule, TuiDialogModule, TuiAlertModule, TUI_SANITIZER } from "@taiga-ui/core";
-import { Component } from '@angular/core';
+import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
+import {
+    TuiRootModule,
+    TuiDialogModule,
+    TuiAlertModule,
+    TUI_SANITIZER,
+} from '@taiga-ui/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import { CodeEditorComponent } from './code-editor/code-editor.component';
 
 @Component({
-  imports: [NxWelcomeComponent, RouterModule, TuiRootModule, TuiDialogModule, TuiAlertModule],
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.less',
-    providers: [{provide: TUI_SANITIZER, useClass: NgDompurifySanitizer}]
+    imports: [
+        CodeEditorComponent,
+        RouterModule,
+        TuiRootModule,
+        TuiDialogModule,
+        TuiAlertModule,
+    ],
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.less',
+    providers: [{ provide: TUI_SANITIZER, useClass: NgDompurifySanitizer }],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  title = 'code-editor';
+    title = 'code-editor';
 }

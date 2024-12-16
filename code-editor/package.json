@@ -15,6 +15,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/schematics-cli": "^19.0.5",
     "@angular/animations": "~19.0.0",
     "@angular/common": "~19.0.0",
     "@angular/compiler": "~19.0.0",
@@ -81,7 +82,7 @@
   "engines": {
     "node": ">= 18.0.0",
     "npm": ">= 10"
-},
+  },
   "nx": {
     "includedScripts": []
   }
