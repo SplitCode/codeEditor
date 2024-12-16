@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { CodeEditorComponent } from './code-editor/code-editor.component';
 
 @Component({
+    standalone: true,
     imports: [
         CodeEditorComponent,
         RouterModule,
