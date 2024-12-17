@@ -59,11 +59,6 @@ export class CodeEditorWindowComponent implements OnChanges, OnInit {
     private readonly http = inject(HttpClient);
     readonly languages = Object.values(LANGUAGES);
 
-    // onInit(editor: { getPosition: () => any }) {
-    //     const line = editor.getPosition();
-    //     console.log(line);
-    // }
-
     ngOnInit() {
         this.languageControl.valueChanges.subscribe((language) => {
             this.editorOptions = { ...this.editorOptions, language };
@@ -83,7 +78,7 @@ export class CodeEditorWindowComponent implements OnChanges, OnInit {
         const code = this.code;
 
         this.http
-            .post('http://localhost:3001/api/run-code', { language, code })
+            .post('http://localhost:3001/execute', { language, code })
             .subscribe({
                 next: (response: any) => (this.output = response.output),
                 error: (error) => console.error(error),

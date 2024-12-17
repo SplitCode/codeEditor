@@ -1,14 +1,19 @@
 {
   "execute": [
     {
-      "id": 1,
-      "status": "success",
-      "output": "Hello, world!\n"
+      "language": "javascript",
+      "code": "console.log('Hello World!')",
+      "output": "Hello World!"
     },
     {
-      "id": 2,
-      "status": "error",
-      "error": "SyntaxError: Unexpected token"
+      "language": "python",
+      "code": "print('Hello World!')",
+      "output": "Hello World!"
+    },
+    {
+      "id": "59f2",
+      "language": "Javascript",
+      "code": "function x() {\nconsole.log(\"Hello world!\");\n}"
     }
   ]
 }
