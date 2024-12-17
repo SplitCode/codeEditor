@@ -3,6 +3,7 @@ import {
     Component,
     inject,
     OnChanges,
+    OnInit,
     SimpleChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -40,8 +41,8 @@ import { LANGUAGES } from '../../constants/languages';
     styleUrl: './code-editor.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CodeEditorComponent implements OnChanges {
-    code = '// Write your code here!';
+export class CodeEditorComponent implements OnChanges, OnInit {
+    code = 'function x() {\nconsole.log("Hello world!");\n}';
     output = '';
 
     languageControl = new FormControl(LANGUAGES.javascript);
@@ -52,10 +53,22 @@ export class CodeEditorComponent implements OnChanges {
     editorOptions = {
         theme: 'vs-dark',
         language: this.languageControl.value,
+        automaticLayout: true,
     };
 
     private readonly http = inject(HttpClient);
     readonly languages = Object.values(LANGUAGES);
+
+    // onInit(editor: { getPosition: () => any }) {
+    //     const line = editor.getPosition();
+    //     console.log(line);
+    // }
+
+    ngOnInit() {
+        this.languageControl.valueChanges.subscribe((language) => {
+            this.editorOptions = { ...this.editorOptions, language };
+        });
+    }
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes['languageControl']) {

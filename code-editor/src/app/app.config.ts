@@ -20,7 +20,11 @@ export const appConfig: ApplicationConfig = {
         {
             provide: NGX_MONACO_EDITOR_CONFIG,
             useValue: {
-                baseUrl: 'assets/monaco',
+                baseUrl: '/assets/monaco/vs',
+                defaultOptions: { automaticLayout: true },
+                onMonacoLoad: () => {
+                    console.log((<any>window).monaco);
+                },
             },
         },
     ],
