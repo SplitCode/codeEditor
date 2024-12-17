@@ -7,7 +7,7 @@ import {
 } from '@taiga-ui/core';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CodeEditorComponent } from './code-editor/code-editor.component';
+import { CodeEditorComponent } from './components/code-editor/code-editor.component';
 
 @Component({
     standalone: true,
