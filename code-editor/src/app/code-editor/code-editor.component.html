@@ -1,7 +1,6 @@
 <div class="container">
-    <!-- <h1>Online Code Editor</h1>
+    <h1>Online Code Editor</h1>
 
-    Language Selector
     <div>
         <label for="language">Select Language:</label>
         <select [(ngModel)]="language">
@@ -13,10 +12,12 @@
     <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code">
     </ngx-monaco-editor>
 
-    <button (click)="runCode()">Run</button>
+    <button tuiButton appearance="primary" size="m" (click)="runCode()">
+        Run
+    </button>
 
     <div *ngIf="output" class="output">
         <h3>Output:</h3>
         <pre>{{ output }}</pre>
-    </div> -->
+    </div>
 </div>
