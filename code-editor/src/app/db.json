@@ -1,0 +1,14 @@
+{
+  "execute": [
+    {
+      "id": 1,
+      "status": "success",
+      "output": "Hello, world!\n"
+    },
+    {
+      "id": 2,
+      "status": "error",
+      "error": "SyntaxError: Unexpected token"
+    }
+  ]
+}
