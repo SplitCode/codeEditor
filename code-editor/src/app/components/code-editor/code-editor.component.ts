@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CodeEditorWindowComponent } from './code-editor-window/code-editor-window.component';
 import { TaskDescriptionComponent } from './tasks-description/task-description.component';
-import { TASKS, TASKS_DETAILS } from 'src/app/constants/tasks';
+import { TASK } from 'src/app/constants/tasks';
 import { LANGUAGES } from 'src/app/constants/languages';
 
 @Component({
@@ -18,5 +18,5 @@ import { LANGUAGES } from 'src/app/constants/languages';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CodeEditorComponent {
-    currentTask = TASKS_DETAILS[TASKS.javascriptTask];
+    currentTask = TASK;
 }
