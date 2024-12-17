@@ -2,18 +2,21 @@
   "execute": [
     {
       "language": "javascript",
-      "code": "console.log('Hello World!')",
-      "output": "Hello World!"
+      "code": "console.log('Hello, world!');",
+      "status": "success",
+      "output": "Hello, world!\n"
+    },
+    {
+      "language": "javascript",
+      "code": "console.log(Hello world!');",
+      "status": "error",
+      "error": "SyntaxError: Unexpected token"
     },
     {
       "language": "python",
-      "code": "print('Hello World!')",
-      "output": "Hello World!"
-    },
-    {
-      "id": "59f2",
-      "language": "Javascript",
-      "code": "function x() {\nconsole.log(\"Hello world!\");\n}"
+      "code": "print('Hello, Python world!')",
+      "status": "success",
+      "output": "Hello, Python world!\n"
     }
   ]
 }

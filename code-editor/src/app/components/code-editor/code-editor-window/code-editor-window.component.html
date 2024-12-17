@@ -26,6 +26,11 @@
         Run
     </button>
 
+    <div *ngIf="error" class="error-message">
+        <h3>Error:</h3>
+        <pre>{{ error }}</pre>
+    </div>
+
     <div *ngIf="output" class="output">
         <h3>Output:</h3>
         <pre>{{ output }}</pre>
