@@ -1,92 +1,22 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    inject,
-    OnChanges,
-    OnInit,
-    SimpleChanges,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-    FormControl,
-    FormGroup,
-    FormsModule,
-    ReactiveFormsModule,
-} from '@angular/forms';
-import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
-import {
-    TuiButtonModule,
-    TuiTextfieldControllerModule,
-    TuiDataListModule,
-} from '@taiga-ui/core';
-import { TuiDataListWrapperModule, TuiSelectModule } from '@taiga-ui/kit';
-import { HttpClient } from '@angular/common/http';
-import { LANGUAGES } from '../../constants/languages';
+import { CodeEditorWindowComponent } from './code-editor-window/code-editor-window.component';
+import { TaskDescriptionComponent } from './tasks-description/task-description.component';
+import { TASKS, TASKS_DETAILS } from 'src/app/constants/tasks';
+import { LANGUAGES } from 'src/app/constants/languages';
 
 @Component({
-    standalone: true,
     selector: 'app-code-editor',
+    standalone: true,
     imports: [
         CommonModule,
-        FormsModule,
-        MonacoEditorModule,
-        TuiButtonModule,
-        TuiDataListModule,
-        TuiDataListWrapperModule,
-        TuiSelectModule,
-        ReactiveFormsModule,
-        TuiTextfieldControllerModule,
+        CodeEditorWindowComponent,
+        TaskDescriptionComponent,
     ],
     templateUrl: './code-editor.component.html',
     styleUrl: './code-editor.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CodeEditorComponent implements OnChanges, OnInit {
-    code = 'function x() {\nconsole.log("Hello world!");\n}';
-    output = '';
-
-    languageControl = new FormControl(LANGUAGES.javascript);
-    formGroup = new FormGroup({
-        language: this.languageControl,
-    });
-
-    editorOptions = {
-        theme: 'vs-dark',
-        language: this.languageControl.value,
-        automaticLayout: true,
-    };
-
-    private readonly http = inject(HttpClient);
-    readonly languages = Object.values(LANGUAGES);
-
-    // onInit(editor: { getPosition: () => any }) {
-    //     const line = editor.getPosition();
-    //     console.log(line);
-    // }
-
-    ngOnInit() {
-        this.languageControl.valueChanges.subscribe((language) => {
-            this.editorOptions = { ...this.editorOptions, language };
-        });
-    }
-
-    ngOnChanges(changes: SimpleChanges) {
-        if (changes['languageControl']) {
-            this.editorOptions.language = this.languageControl.value;
-        }
-    }
-
-    runCode() {
-        console.log('run');
-
-        const language = this.languageControl.value;
-        const code = this.code;
-
-        this.http
-            .post('http://localhost:3001/api/run-code', { language, code })
-            .subscribe({
-                next: (response: any) => (this.output = response.output),
-                error: (error) => console.error(error),
-            });
-    }
+export class CodeEditorComponent {
+    currentTask = TASKS_DETAILS[TASKS.javascriptTask];
 }

@@ -1,39 +1,12 @@
 <div class="container">
-    <h1>Online Code Editor</h1>
+    <h1>Онлайн редактор кода</h1>
 
-    <form [formGroup]="formGroup">
-        <tui-select
-            formControlName="language"
-            tuiTextfieldSize="m"
-            [tuiTextfieldLabelOutside]="true"
-        >
-            <tui-data-list-wrapper
-                *tuiDataList
-                [items]="languages"
-                itemLabelField="value"
-            ></tui-data-list-wrapper>
-        </tui-select>
-    </form>
+    <div class="content">
+        <app-task-description
+            [title]="currentTask.title"
+            [description]="currentTask.description"
+        ></app-task-description>
 
-    <ngx-monaco-editor
-        [options]="editorOptions"
-        [(ngModel)]="code"
-        style="height: 400px"
-    >
-    </ngx-monaco-editor>
-
-    <button
-        tuiButton
-        type="button"
-        appearance="primary"
-        size="m"
-        (click)="runCode()"
-    >
-        Run
-    </button>
-
-    <div *ngIf="output" class="output">
-        <h3>Output:</h3>
-        <pre>{{ output }}</pre>
+        <app-code-editor-window></app-code-editor-window>
     </div>
 </div>
