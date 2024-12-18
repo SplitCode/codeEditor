@@ -22,6 +22,9 @@ import {
 } from '@taiga-ui/core';
 import { TuiDataListWrapperModule, TuiSelectModule } from '@taiga-ui/kit';
 import { TaskService } from 'src/app/services/task.service';
+import { Languages, LanguagesComments } from 'src/app/constants/languages';
+import { catchError, takeUntil, tap } from 'rxjs';
+import { TuiDestroyService } from '@taiga-ui/cdk';
 // import { Task } from 'src/app/models/task-interface';
 
 @Component({
@@ -41,21 +44,23 @@ import { TaskService } from 'src/app/services/task.service';
     templateUrl: './code-editor-window.component.html',
     styleUrl: './code-editor-window.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [TuiDestroyService],
 })
 export class CodeEditorWindowComponent implements OnInit {
     // @Input() currentTask: Task | null = null;
 
     private readonly taskService = inject(TaskService);
+    private readonly destroy$ = inject(TuiDestroyService);
     private readonly cdr = inject(ChangeDetectorRef);
-    readonly languages = ['javascript', 'python'];
 
+    readonly languages = Object.values(Languages);
     readonly loading = signal(false);
 
-    code = '// Write your solution here';
+    code = LanguagesComments[Languages.Javascript];
     output: string | null = null;
     error: string | null = null;
 
-    languageControl = new FormControl<'javascript' | 'python'>('javascript');
+    languageControl = new FormControl<Languages>(Languages.Javascript);
     formGroup = new FormGroup({
         language: this.languageControl,
     });
@@ -67,29 +72,53 @@ export class CodeEditorWindowComponent implements OnInit {
     };
 
     ngOnInit() {
-        this.languageControl.valueChanges.subscribe((language) => {
-            this.editorOptions = { ...this.editorOptions, language };
-        });
+        this.languageControl.valueChanges
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((language) => {
+                if (language) {
+                    this.code = LanguagesComments[language];
+                    this.editorOptions = { ...this.editorOptions, language };
+                }
+            });
     }
 
     runCode() {
         this.loading.set(true);
-        this.error = null;
-        this.output = null;
+        this.resetMessages();
 
         const language = this.languageControl.value;
         const code = this.code;
 
         if (language) {
-            this.taskService
-                .checkSolution(language, code)
-                .subscribe(({ output, error }) => {
+            this.executeCode(language, code);
+        }
+    }
+
+    private resetMessages() {
+        this.error = null;
+        this.output = null;
+    }
+
+    private executeCode(language: Languages, code: string): void {
+        this.taskService
+            .checkSolution(language, code)
+            .pipe(
+                tap(({ output, error }) => {
                     this.output = output;
                     this.error = error;
                     this.loading.set(false);
 
-                    this.cdr.detectChanges();
-                });
-        }
+                    this.cdr.markForCheck();
+                }),
+                catchError((err) => {
+                    this.error = `Error: ${err.message}`;
+                    this.loading.set(false);
+                    this.cdr.markForCheck();
+
+                    return [];
+                }),
+                takeUntil(this.destroy$)
+            )
+            .subscribe();
     }
 }
