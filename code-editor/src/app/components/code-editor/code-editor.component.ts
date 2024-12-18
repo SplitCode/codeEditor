@@ -5,6 +5,7 @@ import { TaskDescriptionComponent } from './tasks-description/task-description.c
 import { TaskService } from 'src/app/services/task.service';
 import { Task } from 'src/app/models/task-interface';
 import { map, Observable } from 'rxjs';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
     selector: 'app-code-editor',
@@ -13,6 +14,7 @@ import { map, Observable } from 'rxjs';
         CommonModule,
         CodeEditorWindowComponent,
         TaskDescriptionComponent,
+        HeaderComponent,
     ],
     templateUrl: './code-editor.component.html',
     styleUrl: './code-editor.component.less',
