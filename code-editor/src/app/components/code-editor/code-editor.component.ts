@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { CodeEditorWindowComponent } from './code-editor-window/code-editor-window.component';
 import { TaskDescriptionComponent } from './tasks-description/task-description.component';
 import { TASK } from 'src/app/constants/tasks';
-import { LANGUAGES } from 'src/app/constants/languages';
 
 @Component({
     selector: 'app-code-editor',

@@ -1,22 +1,31 @@
 {
   "execute": [
     {
+      "id": 1,
       "language": "javascript",
       "code": "console.log('Hello, world!');",
-      "status": "success",
-      "output": "Hello, world!\n"
+      "response": {
+        "status": "success",
+        "output": "Hello, world!\n"
+      }
     },
     {
+      "id": 2,
       "language": "javascript",
-      "code": "console.log(Hello world!');",
-      "status": "error",
-      "error": "SyntaxError: Unexpected token"
+      "code": "console.log(1 + 2);",
+      "response": {
+        "status": "success",
+        "output": "3\n"
+      }
     },
     {
-      "language": "python",
-      "code": "print('Hello, Python world!')",
-      "status": "success",
-      "output": "Hello, Python world!\n"
+      "id": 3,
+      "language": "javascript",
+      "code": "console.log(x);",
+      "response": {
+        "status": "error",
+        "error": "ReferenceError: x is not defined"
+      }
     }
   ]
 }

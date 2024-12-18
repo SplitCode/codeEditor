@@ -1,7 +1,7 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    // inject,
+    inject,
     OnChanges,
     OnInit,
     SimpleChanges,
@@ -20,7 +20,7 @@ import {
     TuiDataListModule,
 } from '@taiga-ui/core';
 import { TuiDataListWrapperModule, TuiSelectModule } from '@taiga-ui/kit';
-// import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 // import { LANGUAGES } from '../../../constants/languages';
 
 @Component({
@@ -42,7 +42,7 @@ import { TuiDataListWrapperModule, TuiSelectModule } from '@taiga-ui/kit';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CodeEditorWindowComponent implements OnChanges, OnInit {
-    code = 'function x() {\nconsole.log("Hello world!");\n}';
+    code = '';
     output: string | null = null;
     error: string | null = null;
 
@@ -57,7 +57,7 @@ export class CodeEditorWindowComponent implements OnChanges, OnInit {
         automaticLayout: true,
     };
 
-    // private readonly http = inject(HttpClient);
+    constructor(private http: HttpClient) {}
     readonly languages = ['javascript', 'python'];
 
     ngOnInit() {
@@ -82,51 +82,67 @@ export class CodeEditorWindowComponent implements OnChanges, OnInit {
         const code = this.code;
 
         if (language && typeof language === 'string') {
-            const mockResponse = this.mockServerResponse(language, code);
+            const response = this.mockServerResponse(language, code);
 
-            if (mockResponse) {
-                if (mockResponse.status === 'success') {
-                    this.output = mockResponse.output || null;
-                } else if (
-                    mockResponse.status === 'error' &&
-                    'error' in mockResponse
-                ) {
-                    this.error = mockResponse.error;
+            if (response) {
+                if (response.status === 'success') {
+                    this.output = response.output || 'Нет вывода.';
+                } else if (response.status === 'error') {
+                    this.error = response.error || 'Неизвестная ошибка.';
                 }
             } else {
-                this.error = 'Произошла ошибка при выполнении запроса.';
+                this.error = 'Не удалось обработать запрос.';
             }
         }
     }
 
     mockServerResponse(language: 'javascript' | 'python', code: string) {
-        const responses = {
-            javascript: [
-                {
-                    code: "console.log('Hello, world!');",
-                    status: 'success',
-                    output: 'Hello, world!\n',
-                },
-                {
-                    code: "console.log(Hello world!');",
-                    status: 'error',
-                    error: 'SyntaxError: Unexpected token',
-                },
-            ],
-            python: [
-                {
-                    code: "print('Hello, Python world!')",
-                    status: 'success',
-                    output: 'Hello, Python world!\n',
-                },
-            ],
-        };
+        if (language === 'javascript') {
+            try {
+                let capturedOutput = ''; // Переменная для хранения вывода
+                const originalConsoleLog = console.log; // Сохраняем оригинальный console.log
 
-        if (responses[language]) {
-            const response = responses[language].find(
-                (item) => item.code === code
-            );
-            return response;
+                // Переопределяем console.log
+                console.log = (...args: unknown[]) => {
+                    capturedOutput += args.join(' ') + '\n';
+                    originalConsoleLog(...args); // Вызываем оригинальный console.log для вывода в консоль
+                };
+
+                const result = eval(code); // Выполняем код
+
+                console.log = originalConsoleLog; // Восстанавливаем оригинальный console.log
+
+                return {
+                    status: 'success',
+                    output:
+                        capturedOutput ||
+                        (result !== undefined ? String(result) : ''),
+                };
+            } catch (error) {
+                // console.log = console.log; // Восстанавливаем originalConsoleLog в случае ошибки
+                const errorMessage =
+                    error instanceof Error
+                        ? error.message
+                        : 'Неизвестная ошибка';
+                return {
+                    status: 'error',
+                    error: errorMessage,
+                };
+            }
+        }
+
+        if (language === 'python') {
+            if (code.startsWith('print(')) {
+                return {
+                    status: 'success',
+                    output: code.match(/print\(['"](.+)['"]\)/)?.[1] + '\n',
+                };
+            } else {
+                return {
+                    status: 'error',
+                    error: 'SyntaxError: Недопустимый Python код',
+                };
+            }
         }
 
         return null;
