@@ -40,11 +40,11 @@ import * as mockData from './../../../../../db.json';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CodeEditorWindowComponent implements OnChanges, OnInit {
-    code = '';
+    code = '// Write your code here';
     output: string | null = null;
     error: string | null = null;
 
-    languageControl = new FormControl<'javascript' | 'python'>('javascript');
+    languageControl = new FormControl<'Javascript' | 'Python'>('Javascript');
     formGroup = new FormGroup({
         language: this.languageControl,
     });
@@ -55,7 +55,7 @@ export class CodeEditorWindowComponent implements OnChanges, OnInit {
         automaticLayout: true,
     };
 
-    readonly languages = ['javascript', 'python'];
+    readonly languages = ['Javascript', 'Python'];
 
     ngOnInit() {
         this.languageControl.valueChanges.subscribe((language) => {

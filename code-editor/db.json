@@ -1,7 +1,7 @@
 {
   "tasks": [
       {
-          "language": "javascript",
+          "language": "Javascript",
           "code": "console.log('Hello, world!')",
           "expectedOutput": "Hello, world!\n",
           "successResponse": {
@@ -14,7 +14,7 @@
           }
       },
       {
-          "language": "python",
+          "language": "Python",
           "code": "print('Hello, world!')",
           "expectedOutput": "Hello, world!\n",
           "successResponse": {
