@@ -6,7 +6,6 @@ import {
     // Input,
     OnInit,
     signal,
-    // SimpleChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -83,7 +82,7 @@ export class CodeEditorWindowComponent implements OnInit {
 
         if (language) {
             this.taskService
-                .runCode(language, code)
+                .checkSolution(language, code)
                 .subscribe(({ output, error }) => {
                     this.output = output;
                     this.error = error;

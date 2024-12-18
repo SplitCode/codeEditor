@@ -18,7 +18,7 @@ export class TaskService {
         return this.http.get<Task>(`${this.apiUrl}/${id}`);
     }
 
-    runCode(
+    checkSolution(
         language: string,
         code: string
     ): Observable<{ output: string; error: string | null }> {
