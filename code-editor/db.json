@@ -1,30 +1,66 @@
 {
   "tasks": [
-      {
-          "language": "Javascript",
+    {
+      "id": 1,
+      "title": "Print Hello World",
+      "description": "Write a program to print 'Hello, World!'",
+      "solutions": {
+        "Javascript": {
           "code": "console.log('Hello, world!')",
           "expectedOutput": "Hello, world!\n",
           "successResponse": {
-              "status": "success",
-              "output": "Hello, world!\n"
+            "status": "success",
+            "output": "Hello, world!\n"
           },
           "errorResponse": {
-              "status": "error",
-              "error": "SyntaxError: Unexpected token"
+            "status": "error",
+            "error": "SyntaxError: Unexpected token"
           }
-      },
-      {
-          "language": "Python",
+        },
+        "Python": {
           "code": "print('Hello, world!')",
           "expectedOutput": "Hello, world!\n",
           "successResponse": {
-              "status": "success",
-              "output": "Hello, world!\n"
+            "status": "success",
+            "output": "Hello, world!\n"
           },
           "errorResponse": {
-              "status": "error",
-              "error": "SyntaxError: Invalid syntax"
+            "status": "error",
+            "error": "SyntaxError: Invalid syntax"
           }
+        }
       }
+    },
+    {
+      "id": 2,
+      "title": "Add Two Numbers",
+      "description": "Write a function to add two numbers and print the result.",
+      "solutions": {
+        "Javascript": {
+          "code": "function add(a, b) { return a + b; } console.log(add(2, 3));",
+          "expectedOutput": "5\n",
+          "successResponse": {
+            "status": "success",
+            "output": "5\n"
+          },
+          "errorResponse": {
+            "status": "error",
+            "error": "ReferenceError: add is not defined"
+          }
+        },
+        "Python": {
+          "code": "def add(a, b): return a + b\nprint(add(2, 3))",
+          "expectedOutput": "5\n",
+          "successResponse": {
+            "status": "success",
+            "output": "5\n"
+          },
+          "errorResponse": {
+            "status": "error",
+            "error": "NameError: name 'add' is not defined"
+          }
+        }
+      }
+    }
   ]
 }

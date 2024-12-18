@@ -1,6 +1,7 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    Input,
     OnChanges,
     OnInit,
     SimpleChanges,
@@ -20,6 +21,7 @@ import {
 } from '@taiga-ui/core';
 import { TuiDataListWrapperModule, TuiSelectModule } from '@taiga-ui/kit';
 import * as mockData from './../../../../../db.json';
+import { TaskService } from 'src/app/services/task.service';
 
 @Component({
     standalone: true,
@@ -40,6 +42,8 @@ import * as mockData from './../../../../../db.json';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CodeEditorWindowComponent implements OnChanges, OnInit {
+    @Input() currentTask: any;
+
     code = '// Write your code here';
     output: string | null = null;
     error: string | null = null;
@@ -55,6 +59,7 @@ export class CodeEditorWindowComponent implements OnChanges, OnInit {
         automaticLayout: true,
     };
 
+    constructor(private taskService: TaskService) {}
     readonly languages = ['Javascript', 'Python'];
 
     ngOnInit() {
@@ -73,20 +78,34 @@ export class CodeEditorWindowComponent implements OnChanges, OnInit {
         this.error = null;
         this.output = null;
 
-        const language = this.languageControl.value;
-        const code = this.code;
-
-        const task = mockData.tasks.find((task) => task.language === language);
-
-        if (!task) {
-            this.error = 'Unsupported language';
+        if (!this.currentTask) {
+            this.error = 'No task selected';
             return;
         }
 
-        if (task.code === code) {
-            this.output = task.successResponse.output;
-        } else {
-            this.error = task.errorResponse.error;
+        const language = this.languageControl.value;
+        const code = this.code;
+
+        // const task = mockData.tasks.find((task) => task.language === language);
+
+        // if (!task) {
+        //     this.error = 'Unsupported language';
+        //     return;
+        // }
+
+        // if (task.code === code) {
+        //     this.output = task.successResponse.output;
+        // } else {
+        //     this.error = task.errorResponse.error;
+        // }
+
+        if (language) {
+            this.taskService
+                .runCode(language, code)
+                .subscribe(({ output, error }) => {
+                    this.output = output;
+                    this.error = error;
+                });
         }
     }
 }
