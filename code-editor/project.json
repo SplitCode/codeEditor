@@ -23,6 +23,7 @@
         "inlineStyleLanguage": "less",
         "assets": [
           "src/assets",
+          "src/db.json",
           {
             "glob": "**/*",
             "input": "public"

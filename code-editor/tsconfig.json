@@ -15,6 +15,7 @@
         "baseUrl": ".",
         "paths": {},
         "esModuleInterop": true,
+        "resolveJsonModule": true,
         "forceConsistentCasingInFileNames": true,
         "strict": true,
         "noImplicitOverride": true,

@@ -1,7 +1,6 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    inject,
     OnChanges,
     OnInit,
     SimpleChanges,
@@ -20,8 +19,7 @@ import {
     TuiDataListModule,
 } from '@taiga-ui/core';
 import { TuiDataListWrapperModule, TuiSelectModule } from '@taiga-ui/kit';
-import { HttpClient } from '@angular/common/http';
-// import { LANGUAGES } from '../../../constants/languages';
+import * as mockData from './../../../../../db.json';
 
 @Component({
     standalone: true,
@@ -57,7 +55,6 @@ export class CodeEditorWindowComponent implements OnChanges, OnInit {
         automaticLayout: true,
     };
 
-    constructor(private http: HttpClient) {}
     readonly languages = ['javascript', 'python'];
 
     ngOnInit() {
@@ -73,78 +70,23 @@ export class CodeEditorWindowComponent implements OnChanges, OnInit {
     }
 
     runCode() {
-        console.log('run');
-
         this.error = null;
         this.output = null;
 
         const language = this.languageControl.value;
         const code = this.code;
 
-        if (language && typeof language === 'string') {
-            const response = this.mockServerResponse(language, code);
+        const task = mockData.tasks.find((task) => task.language === language);
 
-            if (response) {
-                if (response.status === 'success') {
-                    this.output = response.output || 'Нет вывода.';
-                } else if (response.status === 'error') {
-                    this.error = response.error || 'Неизвестная ошибка.';
-                }
-            } else {
-                this.error = 'Не удалось обработать запрос.';
-            }
-        }
-    }
-
-    mockServerResponse(language: 'javascript' | 'python', code: string) {
-        if (language === 'javascript') {
-            try {
-                let capturedOutput = ''; // Переменная для хранения вывода
-                const originalConsoleLog = console.log; // Сохраняем оригинальный console.log
-
-                // Переопределяем console.log
-                console.log = (...args: unknown[]) => {
-                    capturedOutput += args.join(' ') + '\n';
-                    originalConsoleLog(...args); // Вызываем оригинальный console.log для вывода в консоль
-                };
-
-                const result = eval(code); // Выполняем код
-
-                console.log = originalConsoleLog; // Восстанавливаем оригинальный console.log
-
-                return {
-                    status: 'success',
-                    output:
-                        capturedOutput ||
-                        (result !== undefined ? String(result) : ''),
-                };
-            } catch (error) {
-                // console.log = console.log; // Восстанавливаем originalConsoleLog в случае ошибки
-                const errorMessage =
-                    error instanceof Error
-                        ? error.message
-                        : 'Неизвестная ошибка';
-                return {
-                    status: 'error',
-                    error: errorMessage,
-                };
-            }
+        if (!task) {
+            this.error = 'Unsupported language';
+            return;
         }
 
-        if (language === 'python') {
-            if (code.startsWith('print(')) {
-                return {
-                    status: 'success',
-                    output: code.match(/print\(['"](.+)['"]\)/)?.[1] + '\n',
-                };
-            } else {
-                return {
-                    status: 'error',
-                    error: 'SyntaxError: Недопустимый Python код',
-                };
-            }
+        if (task.code === code) {
+            this.output = task.successResponse.output;
+        } else {
+            this.error = task.errorResponse.error;
         }
-
-        return null;
     }
 }
