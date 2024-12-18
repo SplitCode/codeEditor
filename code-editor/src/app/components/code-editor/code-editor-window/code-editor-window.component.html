@@ -1,44 +1,51 @@
 <div class="container">
-    <div class="title">
-        <h1>Code</h1>
-    </div>
-    <form [formGroup]="formGroup">
-        <tui-select
-            formControlName="language"
-            tuiTextfieldSize="m"
-            [tuiTextfieldLabelOutside]="true"
-            [readOnly]="loading()"
+    <div class="code-container">
+        <div class="title">
+            <h1>Code</h1>
+        </div>
+        <form [formGroup]="formGroup">
+            <tui-select
+                formControlName="language"
+                tuiTextfieldSize="m"
+                [tuiTextfieldLabelOutside]="true"
+                [readOnly]="loading()"
+            >
+                <tui-data-list-wrapper
+                    *tuiDataList
+                    [items]="languages"
+                    itemLabelField="value"
+                ></tui-data-list-wrapper>
+            </tui-select>
+        </form>
+
+        <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code">
+        </ngx-monaco-editor>
+
+        <button
+            tuiButton
+            type="button"
+            appearance="primary"
+            size="m"
+            (click)="runCode()"
+            [showLoader]="loading()"
+            [disabled]="loading()"
         >
-            <tui-data-list-wrapper
-                *tuiDataList
-                [items]="languages"
-                itemLabelField="value"
-            ></tui-data-list-wrapper>
-        </tui-select>
-    </form>
-
-    <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code">
-    </ngx-monaco-editor>
-
-    <button
-        tuiButton
-        type="button"
-        appearance="primary"
-        size="m"
-        (click)="runCode()"
-        [showLoader]="loading()"
-        [disabled]="loading()"
-    >
-        Run
-    </button>
-
-    <div *ngIf="error" class="error-message">
-        <h3>{{ status }}:</h3>
-        <pre>{{ error }}</pre>
+            Run
+        </button>
     </div>
 
-    <div *ngIf="output" class="output">
-        <h3>{{ status }}:</h3>
-        <pre>{{ output }}</pre>
+    <div class="message-container">
+        <div class="title">
+            <h1>Result</h1>
+        </div>
+        <div *ngIf="error" class="error-message">
+            <h3>{{ status }}:</h3>
+            <pre>{{ error }}</pre>
+        </div>
+
+        <div *ngIf="output" class="output">
+            <h3>{{ status }}:</h3>
+            <pre>{{ output }}</pre>
+        </div>
     </div>
 </div>
