@@ -4,6 +4,7 @@
             formControlName="language"
             tuiTextfieldSize="m"
             [tuiTextfieldLabelOutside]="true"
+            [readOnly]="loading()"
         >
             <tui-data-list-wrapper
                 *tuiDataList
@@ -22,6 +23,8 @@
         appearance="primary"
         size="m"
         (click)="runCode()"
+        [showLoader]="loading()"
+        [disabled]="loading()"
     >
         Run
     </button>

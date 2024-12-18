@@ -1,10 +1,12 @@
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
-    Input,
-    OnChanges,
+    inject,
+    // Input,
     OnInit,
-    SimpleChanges,
+    signal,
+    // SimpleChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -21,7 +23,7 @@ import {
 } from '@taiga-ui/core';
 import { TuiDataListWrapperModule, TuiSelectModule } from '@taiga-ui/kit';
 import { TaskService } from 'src/app/services/task.service';
-import { Task } from 'src/app/models/task-interface';
+// import { Task } from 'src/app/models/task-interface';
 
 @Component({
     standalone: true,
@@ -41,8 +43,14 @@ import { Task } from 'src/app/models/task-interface';
     styleUrl: './code-editor-window.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CodeEditorWindowComponent implements OnInit, OnChanges {
-    @Input() currentTask: Task | null = null;
+export class CodeEditorWindowComponent implements OnInit {
+    // @Input() currentTask: Task | null = null;
+
+    private readonly taskService = inject(TaskService);
+    private readonly cdr = inject(ChangeDetectorRef);
+    readonly languages = ['javascript', 'python'];
+
+    readonly loading = signal(false);
 
     code = '// Write your solution here';
     output: string | null = null;
@@ -59,29 +67,16 @@ export class CodeEditorWindowComponent implements OnInit, OnChanges {
         automaticLayout: true,
     };
 
-    constructor(private taskService: TaskService) {}
-    readonly languages = ['javascript', 'python'];
-
     ngOnInit() {
         this.languageControl.valueChanges.subscribe((language) => {
             this.editorOptions = { ...this.editorOptions, language };
         });
     }
 
-    ngOnChanges(changes: SimpleChanges) {
-        if (changes['languageControl']) {
-            this.editorOptions.language = this.languageControl.value;
-        }
-    }
-
     runCode() {
+        this.loading.set(true);
         this.error = null;
         this.output = null;
-
-        if (!this.currentTask) {
-            this.error = 'No task selected';
-            return;
-        }
 
         const language = this.languageControl.value;
         const code = this.code;
@@ -92,6 +87,9 @@ export class CodeEditorWindowComponent implements OnInit, OnChanges {
                 .subscribe(({ output, error }) => {
                     this.output = output;
                     this.error = error;
+                    this.loading.set(false);
+
+                    this.cdr.detectChanges();
                 });
         }
     }

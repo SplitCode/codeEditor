@@ -1,14 +1,14 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    EventEmitter,
+    // EventEmitter,
     Input,
-    Output,
+    // Output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-    FormControl,
-    FormGroup,
+    // FormControl,
+    // FormGroup,
     FormsModule,
     ReactiveFormsModule,
 } from '@angular/forms';
@@ -37,18 +37,18 @@ import { TuiDataListWrapperModule, TuiSelectModule } from '@taiga-ui/kit';
 export class TaskDescriptionComponent {
     @Input() title = '';
     @Input() description = '';
-
-    // @Input() tasks: any[] = [];
-    // @Output() taskSelected = new EventEmitter<any>();
-
-    // taskControl = new FormControl();
-    // formGroup = new FormGroup({
-    //     task: this.taskControl,
-    // });
-
-    // ngOnInit() {
-    //     this.taskControl.valueChanges.subscribe((task) => {
-    //         this.taskSelected.emit(task);
-    //     });
-    // }
 }
+
+// @Input() tasks: any[] = [];
+// @Output() taskSelected = new EventEmitter<any>();
+
+// taskControl = new FormControl();
+// formGroup = new FormGroup({
+//     task: this.taskControl,
+// });
+
+// ngOnInit() {
+//     this.taskControl.valueChanges.subscribe((task) => {
+//         this.taskSelected.emit(task);
+//     });
+// }
