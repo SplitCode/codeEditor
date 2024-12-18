@@ -1,8 +1,15 @@
 <div class="container">
     <div class="code-container">
-        <div class="title">
-            <h1>Code</h1>
-        </div>
+        <h4 class="title">
+            <tui-marker-icon
+                mode="primary"
+                new
+                size="xxs"
+                src="tuiIconCodeLarge"
+            ></tui-marker-icon>
+            Код
+        </h4>
+
         <form [formGroup]="formGroup">
             <tui-select
                 formControlName="language"
@@ -35,9 +42,15 @@
     </div>
 
     <div class="message-container">
-        <div class="title">
-            <h1>Result</h1>
-        </div>
+        <h4 class="title">
+            <tui-marker-icon
+                mode="primary"
+                new
+                size="xxs"
+                src="tuiIconCheckSquareLarge"
+            ></tui-marker-icon>
+            Результат
+        </h4>
         <div *ngIf="error" class="error-message">
             <h3>{{ status }}:</h3>
             <pre>{{ error }}</pre>
