@@ -2,18 +2,24 @@
   "tasks": [
     {
       "id": 1,
-      "title": "Print Hello World",
-      "description": "Write a program to print 'Hello, World!'",
+      "title": "Hello, World!",
+      "subtitle": "Задача: напишите программу для вывода строки «Hello, World!» в консоль.",
+      "description": "Описание: задача заключается в том, чтобы написать простую программу, которая напечатает текст Hello, World! на экране. Это классическая задача, с которой часто начинают изучение программирования. Она помогает понять основы синтаксиса выбранного языка, научиться работать с функцией вывода и почувствовать первый успех в написании кода.",
+      "instructions": [
+        "Выберите язык программирования: JavaScript или Python",
+        "Используйте предложенный шаблон кода для создания решения",
+        "Запустите свое решение и проверьте результат"
+      ],
       "solutions": {
         "javascript": {
           "code": "console.log('Hello, world!')",
           "expectedOutput": "Hello, world!\n",
           "successResponse": {
-            "status": "success",
+            "status": "Success",
             "output": "Hello, world!\n"
           },
           "errorResponse": {
-            "status": "error",
+            "status": "Error",
             "error": "SyntaxError: Unexpected token"
           }
         },
@@ -21,43 +27,12 @@
           "code": "print('Hello, world!')",
           "expectedOutput": "Hello, world!\n",
           "successResponse": {
-            "status": "success",
+            "status": "Success",
             "output": "Hello, world!\n"
           },
           "errorResponse": {
-            "status": "error",
+            "status": "Error",
             "error": "SyntaxError: Invalid syntax"
-          }
-        }
-      }
-    },
-    {
-      "id": 2,
-      "title": "Add Two Numbers",
-      "description": "Write a function to add two numbers and print the result.",
-      "solutions": {
-        "javascript": {
-          "code": "function add(a, b) { return a + b; } console.log(add(2, 3));",
-          "expectedOutput": "5\n",
-          "successResponse": {
-            "status": "success",
-            "output": "5\n"
-          },
-          "errorResponse": {
-            "status": "error",
-            "error": "ReferenceError: add is not defined"
-          }
-        },
-        "python": {
-          "code": "def add(a, b): return a + b\nprint(add(2, 3))",
-          "expectedOutput": "5\n",
-          "successResponse": {
-            "status": "success",
-            "output": "5\n"
-          },
-          "errorResponse": {
-            "status": "error",
-            "error": "NameError: name 'add' is not defined"
           }
         }
       }

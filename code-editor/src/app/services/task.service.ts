@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { Task } from '../models/task-interface';
 
 @Injectable({
@@ -11,17 +11,18 @@ export class TaskService {
     private readonly http = inject(HttpClient);
 
     getTasks(): Observable<Task[]> {
-        return this.http.get<Task[]>(this.apiUrl);
-    }
-
-    getTaskById(id: number): Observable<Task> {
-        return this.http.get<Task>(`${this.apiUrl}/${id}`);
+        return this.http.get<Task[]>(this.apiUrl).pipe(
+            catchError((err) => {
+                console.error('Failed to load tasks', err);
+                return of([]);
+            })
+        );
     }
 
     checkSolution(
         language: string,
         code: string
-    ): Observable<{ output: string; error: string | null }> {
+    ): Observable<{ output: string; error: string | null; status: string }> {
         return this.getTasks().pipe(
             map((tasks) => {
                 const task = tasks.find((t) => t.solutions[language]);
@@ -29,17 +30,23 @@ export class TaskService {
                     return {
                         output: '',
                         error: 'Language not supported for this task',
+                        status: 'error',
                     };
                 }
 
                 const solution = task.solutions[language];
                 if (solution.code === code) {
                     return {
+                        status: solution.successResponse.status,
                         output: solution.successResponse.output,
                         error: null,
                     };
                 } else {
-                    return { output: '', error: solution.errorResponse.error };
+                    return {
+                        status: solution.errorResponse.status,
+                        output: '',
+                        error: solution.errorResponse.error,
+                    };
                 }
             })
         );

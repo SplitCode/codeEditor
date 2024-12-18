@@ -4,20 +4,9 @@
     <div class="content">
         <ng-container *ngIf="currentTask$ | async as currentTask">
             <app-task-description
-                [title]="currentTask.title"
-                [description]="currentTask.description"
+                [currentTask]="currentTask"
             ></app-task-description>
 
-            <!-- <app-task-description
-            [title]="currentTask?.title || ''"
-            [description]="currentTask?.description || ''"
-            [tasks]="tasks"
-            (taskSelected)="selectTask($event)"
-        ></app-task-description> -->
-
-            <!-- <app-code-editor-window
-                [currentTask]="currentTask"
-            ></app-code-editor-window> -->
             <app-code-editor-window></app-code-editor-window>
         </ng-container>
     </div>

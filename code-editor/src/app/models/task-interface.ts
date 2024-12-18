@@ -1,10 +1,10 @@
 export interface Task {
     id: number;
     title: string;
+    subtitle: string;
     description: string;
-    solutions: {
-        [language: string]: Solution;
-    };
+    instructions: string;
+    solutions: Record<string, Solution>;
 }
 
 export interface Solution {

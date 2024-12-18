@@ -1,9 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    inject,
-    // OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CodeEditorWindowComponent } from './code-editor-window/code-editor-window.component';
 import { TaskDescriptionComponent } from './tasks-description/task-description.component';
@@ -27,24 +22,7 @@ export class CodeEditorComponent {
     private readonly taskService = inject(TaskService);
 
     tasks$: Observable<Task[]> = this.taskService.getTasks();
-    // currentTask!: Task;
-
     currentTask$: Observable<Task | null> = this.tasks$.pipe(
         map((tasks) => (tasks.length > 0 ? tasks[0] : null))
     );
-
-    // ngOnInit() {
-    //     this.tasks$.subscribe((tasks) => {
-    //         if (tasks.length > 0) {
-    //             this.currentTask = tasks[0];
-    //         }
-    //     });
-    // }
-
-    selectTask(task: Task) {
-        this.currentTask$ = new Observable<Task>((observer) => {
-            observer.next(task);
-            observer.complete();
-        });
-    }
 }

@@ -1,4 +1,7 @@
 <div class="container">
+    <div class="title">
+        <h1>Code</h1>
+    </div>
     <form [formGroup]="formGroup">
         <tui-select
             formControlName="language"
@@ -30,12 +33,12 @@
     </button>
 
     <div *ngIf="error" class="error-message">
-        <h3>Error:</h3>
+        <h3>{{ status }}:</h3>
         <pre>{{ error }}</pre>
     </div>
 
     <div *ngIf="output" class="output">
-        <h3>Output:</h3>
+        <h3>{{ status }}:</h3>
         <pre>{{ output }}</pre>
     </div>
 </div>
