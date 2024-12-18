@@ -20,7 +20,7 @@ import {
     TuiDataListModule,
 } from '@taiga-ui/core';
 import { TuiDataListWrapperModule, TuiSelectModule } from '@taiga-ui/kit';
-import * as mockData from './../../../../../db.json';
+// import * as mockData from './../../../../../db.json';
 import { TaskService } from 'src/app/services/task.service';
 
 @Component({
@@ -41,14 +41,14 @@ import { TaskService } from 'src/app/services/task.service';
     styleUrl: './code-editor-window.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CodeEditorWindowComponent implements OnChanges, OnInit {
+export class CodeEditorWindowComponent implements OnInit {
     @Input() currentTask: any;
 
-    code = '// Write your code here';
+    code = '// Write your solution here';
     output: string | null = null;
     error: string | null = null;
 
-    languageControl = new FormControl<'Javascript' | 'Python'>('Javascript');
+    languageControl = new FormControl<'javascript' | 'python'>('javascript');
     formGroup = new FormGroup({
         language: this.languageControl,
     });
@@ -60,7 +60,7 @@ export class CodeEditorWindowComponent implements OnChanges, OnInit {
     };
 
     constructor(private taskService: TaskService) {}
-    readonly languages = ['Javascript', 'Python'];
+    readonly languages = ['javascript', 'python'];
 
     ngOnInit() {
         this.languageControl.valueChanges.subscribe((language) => {
@@ -68,11 +68,11 @@ export class CodeEditorWindowComponent implements OnChanges, OnInit {
         });
     }
 
-    ngOnChanges(changes: SimpleChanges) {
-        if (changes['languageControl']) {
-            this.editorOptions.language = this.languageControl.value;
-        }
-    }
+    // ngOnChanges(changes: SimpleChanges) {
+    //     if (changes['languageControl']) {
+    //         this.editorOptions.language = this.languageControl.value;
+    //     }
+    // }
 
     runCode() {
         this.error = null;

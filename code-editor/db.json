@@ -5,7 +5,7 @@
       "title": "Print Hello World",
       "description": "Write a program to print 'Hello, World!'",
       "solutions": {
-        "Javascript": {
+        "javascript": {
           "code": "console.log('Hello, world!')",
           "expectedOutput": "Hello, world!\n",
           "successResponse": {
@@ -17,7 +17,7 @@
             "error": "SyntaxError: Unexpected token"
           }
         },
-        "Python": {
+        "python": {
           "code": "print('Hello, world!')",
           "expectedOutput": "Hello, world!\n",
           "successResponse": {
@@ -36,7 +36,7 @@
       "title": "Add Two Numbers",
       "description": "Write a function to add two numbers and print the result.",
       "solutions": {
-        "Javascript": {
+        "javascript": {
           "code": "function add(a, b) { return a + b; } console.log(add(2, 3));",
           "expectedOutput": "5\n",
           "successResponse": {
@@ -48,7 +48,7 @@
             "error": "ReferenceError: add is not defined"
           }
         },
-        "Python": {
+        "python": {
           "code": "def add(a, b): return a + b\nprint(add(2, 3))",
           "expectedOutput": "5\n",
           "successResponse": {
