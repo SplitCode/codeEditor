@@ -20,8 +20,8 @@ import {
     TuiDataListModule,
 } from '@taiga-ui/core';
 import { TuiDataListWrapperModule, TuiSelectModule } from '@taiga-ui/kit';
-// import * as mockData from './../../../../../db.json';
 import { TaskService } from 'src/app/services/task.service';
+import { Task } from 'src/app/models/task-interface';
 
 @Component({
     standalone: true,
@@ -41,8 +41,8 @@ import { TaskService } from 'src/app/services/task.service';
     styleUrl: './code-editor-window.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CodeEditorWindowComponent implements OnInit {
-    @Input() currentTask: any;
+export class CodeEditorWindowComponent implements OnInit, OnChanges {
+    @Input() currentTask: Task | null = null;
 
     code = '// Write your solution here';
     output: string | null = null;
@@ -68,11 +68,11 @@ export class CodeEditorWindowComponent implements OnInit {
         });
     }
 
-    // ngOnChanges(changes: SimpleChanges) {
-    //     if (changes['languageControl']) {
-    //         this.editorOptions.language = this.languageControl.value;
-    //     }
-    // }
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes['languageControl']) {
+            this.editorOptions.language = this.languageControl.value;
+        }
+    }
 
     runCode() {
         this.error = null;
@@ -85,19 +85,6 @@ export class CodeEditorWindowComponent implements OnInit {
 
         const language = this.languageControl.value;
         const code = this.code;
-
-        // const task = mockData.tasks.find((task) => task.language === language);
-
-        // if (!task) {
-        //     this.error = 'Unsupported language';
-        //     return;
-        // }
-
-        // if (task.code === code) {
-        //     this.output = task.successResponse.output;
-        // } else {
-        //     this.error = task.errorResponse.error;
-        // }
 
         if (language) {
             this.taskService
