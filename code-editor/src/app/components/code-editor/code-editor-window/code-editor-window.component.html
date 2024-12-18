@@ -1,4 +1,4 @@
-<div class="container">
+<div class="code-editor">
     <div class="code-container">
         <h4 class="title">
             <tui-marker-icon
@@ -25,20 +25,37 @@
             </tui-select>
         </form>
 
-        <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code">
+        <ngx-monaco-editor
+            style="height: 100%"
+            [options]="editorOptions"
+            [(ngModel)]="code"
+        >
         </ngx-monaco-editor>
 
-        <button
-            tuiButton
-            type="button"
-            appearance="primary"
-            size="m"
-            (click)="runCode()"
-            [showLoader]="loading()"
-            [disabled]="loading()"
-        >
-            Run
-        </button>
+        <div class="buttons">
+            <button
+                tuiButton
+                type="button"
+                appearance="primary"
+                size="m"
+                (click)="runCode()"
+                [showLoader]="loading()"
+                [disabled]="loading()"
+            >
+                Старт
+            </button>
+            <button
+                tuiButton
+                type="button"
+                appearance="secondary"
+                size="m"
+                (click)="cleanCode()"
+                [showLoader]="loading()"
+                [disabled]="loading()"
+            >
+                Сброс
+            </button>
+        </div>
     </div>
 
     <div class="message-container">
@@ -51,6 +68,7 @@
             ></tui-marker-icon>
             Результат
         </h4>
+
         <div *ngIf="error" class="error-message">
             <h3>{{ status }}:</h3>
             <pre>{{ error }}</pre>

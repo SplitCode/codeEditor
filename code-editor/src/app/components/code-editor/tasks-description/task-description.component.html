@@ -10,7 +10,27 @@
     </h4>
 
     <h2>{{ currentTask.title }}</h2>
-    <h2>{{ currentTask.subtitle }}</h2>
-    <p>{{ currentTask.description }}</p>
-    <p>{{ currentTask.instructions }}</p>
+
+    <div>
+        <strong>{{ currentTask.descriptionTitle }}</strong>
+        <p>{{ currentTask.description }}</p>
+    </div>
+
+    <div>
+        <strong>{{ currentTask.instructionsTitle }}</strong>
+        <ul>
+            <li *ngFor="let instruction of currentTask.instructions">
+                &bull; {{ instruction }}
+            </li>
+        </ul>
+    </div>
+
+    <div>
+        <strong>{{ currentTask.hintTitle }}</strong>
+        <ul>
+            <li *ngFor="let hint of currentTask.hints">&bull; {{ hint }}</li>
+        </ul>
+    </div>
+
+    <div class="footer"></div>
 </div>

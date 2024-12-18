@@ -101,6 +101,16 @@ export class CodeEditorWindowComponent implements OnInit {
         this.output = null;
     }
 
+    cleanCode() {
+        const language = this.languageControl.value;
+        if (language) {
+            this.code = LanguageComments[language];
+        }
+
+        this.resetMessages();
+        this.cdr.markForCheck();
+    }
+
     private executeCode(language: Languages, code: string): void {
         this.taskService
             .checkSolution(language, code)

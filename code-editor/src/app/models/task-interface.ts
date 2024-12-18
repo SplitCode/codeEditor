@@ -1,9 +1,12 @@
 export interface Task {
     id: number;
     title: string;
-    subtitle: string;
+    descriptionTitle: string;
     description: string;
+    instructionsTitle: string;
     instructions: string;
+    hintTitle: string;
+    hints: string;
     solutions: Record<string, Solution>;
 }
 

@@ -1,9 +1,10 @@
-.container {
+.code-editor {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
+  border-radius: 0.5rem;
+  height: 100%;
   gap: 1rem;
-  max-width: 56.25rem;
-  margin: 0 auto;
 }
 
 .title {
@@ -19,6 +20,8 @@
 .message-container {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
+  overflow-y: auto;
   gap: 1rem;
   padding: 1.25rem;
   border-radius: 0.5rem;
@@ -27,12 +30,16 @@
   box-shadow: var(--card-shadow);
 }
 
+.code-container {
+  min-height: 60%;
+}
+
 .error-message,
 .output {
-  margin-top: 1.25rem;
+  // margin-top: 1.25rem;
   padding: 0.938rem;
   border-radius: 0.313rem;
-  flex-grow: 1;
+  // flex-grow: 1;
 }
 
 .error-message {
@@ -41,4 +48,10 @@
 
 .output {
   background: rgb(175, 220, 175);
+}
+
+.buttons {
+  display: flex;
+  justify-content: left;
+  gap: 1rem;
 }
