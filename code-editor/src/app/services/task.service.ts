@@ -7,7 +7,9 @@ import { Task } from '../models/task-interface';
     providedIn: 'root',
 })
 export class TaskService {
-    private apiUrl = 'http://localhost:3000/tasks';
+    // private apiUrl = 'http://localhost:3000/tasks';
+    private apiUrl =
+        'https://my-json-server.typicode.com/SplitCode/codeEditorBack/tasks';
     private readonly http = inject(HttpClient);
 
     getTasks(): Observable<Task[]> {
