@@ -1,7 +1,9 @@
 {
     "name": "@code-editor/source",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "license": "MIT",
+    "description": "A simple code editor",
+    "author": "Natalia Bandurova",
     "scripts": {
         "start": "nx serve",
         "build": "nx build",
