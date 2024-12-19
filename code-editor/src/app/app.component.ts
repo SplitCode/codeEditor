@@ -20,7 +20,6 @@ import { CodeEditorComponent } from './components/code-editor/code-editor.compon
     ],
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrl: './app.component.less',
     providers: [{ provide: TUI_SANITIZER, useClass: NgDompurifySanitizer }],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
