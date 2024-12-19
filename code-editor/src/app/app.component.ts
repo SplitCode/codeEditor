@@ -24,6 +24,4 @@ import { CodeEditorComponent } from './components/code-editor/code-editor.compon
     providers: [{ provide: TUI_SANITIZER, useClass: NgDompurifySanitizer }],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
-    title = 'code-editor';
-}
+export class AppComponent {}

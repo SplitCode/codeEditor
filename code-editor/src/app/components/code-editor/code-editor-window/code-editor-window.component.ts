@@ -24,10 +24,10 @@ import {
     TuiMarkerIconModule,
     TuiSelectModule,
 } from '@taiga-ui/kit';
+import { TuiDestroyService } from '@taiga-ui/cdk';
 import { TaskService } from 'src/app/services/task.service';
 import { Languages, LanguageComments } from 'src/app/constants/languages';
 import { catchError, takeUntil, tap } from 'rxjs';
-import { TuiDestroyService } from '@taiga-ui/cdk';
 
 @Component({
     standalone: true,
