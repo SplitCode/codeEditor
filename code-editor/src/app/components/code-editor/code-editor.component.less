@@ -31,4 +31,17 @@ app-code-editor-window {
 
 app-header {
   width: 100%;
+  max-width: 87.5rem;
+}
+
+@media (max-width: 680px) {
+  .content {
+    flex-direction: column;
+  }
+
+  app-task-description,
+  app-code-editor-window {
+    max-width: 100%;
+    width: 100%;
+  }
 }
