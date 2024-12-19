@@ -80,6 +80,7 @@ export class CodeEditorWindowComponent implements OnInit {
                 if (language) {
                     this.code = LanguageComments[language];
                     this.editorOptions = { ...this.editorOptions, language };
+                    this.resetMessages();
                 }
             });
     }
