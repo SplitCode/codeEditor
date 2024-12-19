@@ -11,8 +11,7 @@
     "format:check": "prettier --check .",
     "format": "prettier --write .",
     "stylelint": "stylelint 'src/**/*.less'",
-    "stylelint:fix": "stylelint --fix 'src/**/*.less'",
-    "start:server": "json-server --watch db.json --port 3000"
+    "stylelint:fix": "stylelint --fix 'src/**/*.less'"
   },
   "private": true,
   "dependencies": {
@@ -33,7 +32,6 @@
     "@taiga-ui/styles": "^3.97.0",
     "@tinkoff/ng-dompurify": "4.0.0",
     "dompurify": "3.0.6",
-    "json-server": "^1.0.0-beta.3",
     "monaco-editor": "^0.50.0",
     "ngx-monaco-editor-v2": "^18.1.0",
     "rxjs": "~7.8.0",
