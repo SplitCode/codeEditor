@@ -1,118 +1,116 @@
 {
-  "name": "code-editor",
-  "$schema": "node_modules/nx/schemas/project-schema.json",
-  "includedScripts": [],
-  "projectType": "application",
-  "prefix": "app",
-  "sourceRoot": "./src",
-  "tags": [],
-  "targets": {
-    "build": {
-      "executor": "@angular-devkit/build-angular:application",
-      "outputs": [
-        "{options.outputPath}"
-      ],
-      "options": {
-        "outputPath": "dist/code-editor",
-        "index": "./src/index.html",
-        "browser": "./src/main.ts",
-        "polyfills": [
-          "zone.js"
-        ],
-        "tsConfig": "tsconfig.app.json",
-        "inlineStyleLanguage": "less",
-        "assets": [
-          "src/assets",
-          "src/db.json",
-          {
-            "glob": "**/*",
-            "input": "public"
-          },
-          {
-            "glob": "**/*",
-            "input": "node_modules/@taiga-ui/icons/src",
-            "output": "assets/taiga-ui/icons"
-          },
-          {
-            "glob": "**/*",
-            "input": "node_modules/monaco-editor/min",
-            "output": "assets/monaco/"
-          }
-        ],
-        "styles": [
-          "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less",
-          "node_modules/@taiga-ui/core/styles/taiga-ui-fonts.less",
-          "node_modules/@taiga-ui/styles/taiga-ui-global.less",
-          "./src/styles.less"
-        ],
-        "scripts": []
-      },
-      "configurations": {
-        "production": {
-          "budgets": [
-            {
-              "type": "initial",
-              "maximumWarning": "2MB",
-              "maximumError": "5MB"
+    "name": "code-editor",
+    "$schema": "node_modules/nx/schemas/project-schema.json",
+    "includedScripts": [],
+    "projectType": "application",
+    "prefix": "app",
+    "sourceRoot": "./src",
+    "tags": [],
+    "targets": {
+        "build": {
+            "executor": "@angular-devkit/build-angular:application",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/code-editor",
+                "index": "./src/index.html",
+                "browser": "./src/main.ts",
+                "polyfills": ["zone.js"],
+                "tsConfig": "tsconfig.app.json",
+                "inlineStyleLanguage": "less",
+                "assets": [
+                    "src/assets",
+                    "src/db.json",
+                    {
+                        "glob": "**/*",
+                        "input": "public"
+                    },
+                    {
+                        "glob": "**/*",
+                        "input": "node_modules/@taiga-ui/icons/src",
+                        "output": "assets/taiga-ui/icons"
+                    },
+                    {
+                        "glob": "**/*",
+                        "input": "node_modules/monaco-editor/min",
+                        "output": "assets/monaco/"
+                    }
+                ],
+                "styles": [
+                    "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less",
+                    "node_modules/@taiga-ui/core/styles/taiga-ui-fonts.less",
+                    "node_modules/@taiga-ui/styles/taiga-ui-global.less",
+                    "./src/styles.less"
+                ],
+                "scripts": []
             },
-            {
-              "type": "anyComponentStyle",
-              "maximumWarning": "4kb",
-              "maximumError": "8kb"
+            "configurations": {
+                "production": {
+                    "fileReplacements": [
+                        {
+                            "replace": "src/environments/environment.ts",
+                            "with": "src/environments/environment.dev.ts"
+                        }
+                    ],
+                    "budgets": [
+                        {
+                            "type": "initial",
+                            "maximumWarning": "2MB",
+                            "maximumError": "5MB"
+                        },
+                        {
+                            "type": "anyComponentStyle",
+                            "maximumWarning": "4kb",
+                            "maximumError": "8kb"
+                        }
+                    ],
+                    "outputHashing": "all"
+                },
+                "development": {
+                    "optimization": false,
+                    "extractLicenses": false,
+                    "sourceMap": true
+                }
+            },
+            "defaultConfiguration": "production"
+        },
+        "serve": {
+            "executor": "@angular-devkit/build-angular:dev-server",
+            "configurations": {
+                "production": {
+                    "buildTarget": "code-editor:build:production"
+                },
+                "development": {
+                    "buildTarget": "code-editor:build:development"
+                }
+            },
+            "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+            "executor": "@angular-devkit/build-angular:extract-i18n",
+            "options": {
+                "buildTarget": "code-editor:build"
             }
-          ],
-          "outputHashing": "all"
         },
-        "development": {
-          "optimization": false,
-          "extractLicenses": false,
-          "sourceMap": true
-        }
-      },
-      "defaultConfiguration": "production"
-    },
-    "serve": {
-      "executor": "@angular-devkit/build-angular:dev-server",
-      "configurations": {
-        "production": {
-          "buildTarget": "code-editor:build:production"
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "options": {
+                "lintFilePatterns": ["./src"]
+            }
         },
-        "development": {
-          "buildTarget": "code-editor:build:development"
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectName}"],
+            "options": {
+                "jestConfig": "jest.config.ts"
+            }
+        },
+        "serve-static": {
+            "executor": "@nx/web:file-server",
+            "options": {
+                "buildTarget": "code-editor:build",
+                "staticFilePath": "dist/code-editor/browser",
+                "spa": true
+            }
         }
-      },
-      "defaultConfiguration": "development"
-    },
-    "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
-      "options": {
-        "buildTarget": "code-editor:build"
-      }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": [
-          "./src"
-        ]
-      }
-    },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectName}"
-      ],
-      "options": {
-        "jestConfig": "jest.config.ts"
-      }
-    },
-    "serve-static": {
-      "executor": "@nx/web:file-server",
-      "options": {
-        "buildTarget": "code-editor:build",
-        "staticFilePath": "dist/code-editor/browser",
-        "spa": true
-      }
     }
-  }
 }
