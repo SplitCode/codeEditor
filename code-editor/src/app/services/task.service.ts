@@ -13,7 +13,7 @@ export class TaskService {
     getTasks(): Observable<Task[]> {
         return this.http.get<Task[]>(this.apiUrl).pipe(
             catchError((err) => {
-                console.error('Failed to load tasks', err);
+                console.error('Не удалось загрузить задачи', err);
                 return of([]);
             })
         );
@@ -29,8 +29,8 @@ export class TaskService {
                 if (!task) {
                     return {
                         output: '',
-                        error: 'Language not supported for this task',
-                        status: 'error',
+                        error: 'Язык не поддерживается для этой задачи',
+                        status: 'Error',
                     };
                 }
 

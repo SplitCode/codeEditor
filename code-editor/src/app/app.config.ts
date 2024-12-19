@@ -22,9 +22,6 @@ export const appConfig: ApplicationConfig = {
             useValue: {
                 baseUrl: '/assets/monaco/vs',
                 defaultOptions: { automaticLayout: true },
-                onMonacoLoad: () => {
-                    console.log((<any>window).monaco);
-                },
             },
         },
     ],

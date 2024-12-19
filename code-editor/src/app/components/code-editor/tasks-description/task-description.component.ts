@@ -12,5 +12,5 @@ import { TuiMarkerIconModule } from '@taiga-ui/kit';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskDescriptionComponent {
-    @Input() currentTask!: Task;
+    @Input() currentTask: Task | null = null;
 }

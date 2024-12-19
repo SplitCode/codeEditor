@@ -9,26 +9,26 @@
         Задача
     </h4>
 
-    <h2>{{ currentTask.title }}</h2>
+    <h2>{{ currentTask?.title }}</h2>
 
     <div>
-        <strong>{{ currentTask.descriptionTitle }}</strong>
-        <p>{{ currentTask.description }}</p>
+        <strong>{{ currentTask?.descriptionTitle }}</strong>
+        <p>{{ currentTask?.description }}</p>
     </div>
 
     <div>
-        <strong>{{ currentTask.instructionsTitle }}</strong>
+        <strong>{{ currentTask?.instructionsTitle }}</strong>
         <ul>
-            <li *ngFor="let instruction of currentTask.instructions">
+            <li *ngFor="let instruction of currentTask?.instructions">
                 &bull; {{ instruction }}
             </li>
         </ul>
     </div>
 
     <div>
-        <strong>{{ currentTask.hintTitle }}</strong>
+        <strong>{{ currentTask?.hintTitle }}</strong>
         <ul>
-            <li *ngFor="let hint of currentTask.hints">&bull; {{ hint }}</li>
+            <li *ngFor="let hint of currentTask?.hints">&bull; {{ hint }}</li>
         </ul>
     </div>
 

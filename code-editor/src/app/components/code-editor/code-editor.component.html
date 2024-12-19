@@ -1,13 +1,24 @@
 <div class="container">
     <app-header></app-header>
 
-    <div class="content">
-        <ng-container *ngIf="currentTask$ | async as currentTask">
-            <app-task-description
-                [currentTask]="currentTask"
-            ></app-task-description>
-
-            <app-code-editor-window></app-code-editor-window>
-        </ng-container>
+    <div class="content" style="position: relative">
+        <tui-loader
+            *ngIf="loading()"
+            size="xl"
+            [showLoader]="true"
+            style="
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 10;
+            "
+        >
+        </tui-loader>
+        <app-task-description
+            [currentTask]="currentTask$ | async"
+        ></app-task-description>
+        <app-code-editor-window></app-code-editor-window>
     </div>
 </div>
