@@ -1,6 +1,6 @@
 <div class="code-editor">
-    <div class="code-container">
-        <h4 class="title">
+    <div class="code-editor__container">
+        <h4 class="code-editor__title">
             <tui-marker-icon
                 mode="primary"
                 new
@@ -10,7 +10,7 @@
             Код
         </h4>
 
-        <form [formGroup]="formGroup">
+        <form class="code-editor__form" [formGroup]="formGroup">
             <tui-select
                 formControlName="language"
                 tuiTextfieldSize="m"
@@ -31,7 +31,7 @@
         >
         </ngx-monaco-editor>
 
-        <div class="buttons">
+        <div class="code-editor__buttons">
             <button
                 tuiButton
                 type="button"
@@ -58,8 +58,8 @@
         </div>
     </div>
 
-    <div class="message-container">
-        <h4 class="title">
+    <div class="code-editor__message-container">
+        <h4 class="code-editor__title">
             <tui-marker-icon
                 mode="primary"
                 new
@@ -69,16 +69,16 @@
             Результат
         </h4>
 
-        <div *ngIf="error" class="error-message">
+        <div *ngIf="error" class="code-editor__error-message">
             <h3>{{ status }}:</h3>
             <pre>{{ error }}</pre>
         </div>
 
-        <div *ngIf="output" class="output">
+        <div *ngIf="output" class="code-editor__output">
             <h3>{{ status }}:</h3>
             <pre>{{ output }}</pre>
         </div>
 
-        <div class="footer"></div>
+        <div class="code-editor__footer"></div>
     </div>
 </div>

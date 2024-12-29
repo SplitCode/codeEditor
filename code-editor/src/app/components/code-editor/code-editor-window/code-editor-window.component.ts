@@ -62,8 +62,8 @@ export class CodeEditorWindowComponent implements OnInit {
     output: string | null = null;
     error: string | null = null;
 
-    languageControl = new FormControl<Languages>(Languages.Javascript);
-    formGroup = new FormGroup({
+    readonly languageControl = new FormControl<Languages>(Languages.Javascript);
+    readonly formGroup = new FormGroup({
         language: this.languageControl,
     });
 
@@ -73,7 +73,7 @@ export class CodeEditorWindowComponent implements OnInit {
         automaticLayout: true,
     };
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.languageControl.valueChanges
             .pipe(takeUntil(this.destroy$))
             .subscribe((language) => {
@@ -85,7 +85,7 @@ export class CodeEditorWindowComponent implements OnInit {
             });
     }
 
-    runCode() {
+    runCode(): void {
         this.loading.set(true);
         this.resetMessages();
 
@@ -102,7 +102,7 @@ export class CodeEditorWindowComponent implements OnInit {
         this.output = null;
     }
 
-    cleanCode() {
+    cleanCode(): void {
         const language = this.languageControl.value;
         if (language) {
             this.code = LanguageComments[language];

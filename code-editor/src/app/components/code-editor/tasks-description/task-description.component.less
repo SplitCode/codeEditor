@@ -1,4 +1,4 @@
-.task-description {
+.task {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
@@ -8,18 +8,22 @@
     background: var(--main-background);
     box-shadow: var(--card-shadow);
     gap: 1rem;
+
+    &__title {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding-bottom: 0.5rem;
+        font-size: 1.25rem;
+        border-bottom: 0.063rem solid var(--tui-base-04);
+    }
+
+    &__footer {
+        border-top: 0.063rem solid var(--tui-base-04);
+        margin-top: auto;
+    }
 }
 
-.title {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding-bottom: 0.5rem;
-    font-size: 1.25rem;
-    border-bottom: 0.063rem solid var(--tui-base-04);
-}
 
-.footer {
-    border-top: 0.063rem solid var(--tui-base-04);
-    margin-top: auto;
-}
+
+

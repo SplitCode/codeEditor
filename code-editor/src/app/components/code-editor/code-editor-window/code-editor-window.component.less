@@ -5,67 +5,67 @@
     border-radius: 0.5rem;
     height: 100%;
     gap: 1rem;
-}
 
-.title {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding-bottom: 0.5rem;
-    font-size: 1.25rem;
-    border-bottom: 0.063rem solid var(--tui-base-04);
-}
-
-.code-container,
-.message-container {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    overflow-y: auto;
-    gap: 1rem;
-    padding: 1.25rem;
-    border-radius: 0.5rem;
-    height: 100%;
-    background: var(--main-background);
-    box-shadow: var(--card-shadow);
-}
-
-.code-container {
-    min-height: 60%;
-}
-
-.error-message,
-.output {
-    padding: 0.938rem;
-    border-radius: 0.313rem;
-}
-
-.error-message {
-    background: var(--error-background);
-}
-
-.output {
-    background: var(--success-background);
-}
-
-.buttons {
-    display: flex;
-    justify-content: left;
-    gap: 1rem;
-}
-
-.footer {
-    border-top: 0.063rem solid var(--tui-base-04);
-    margin-top: auto;
-}
-
-@media (width <= 680px) {
-    .code-container {
-        min-height: 65%;
+    &__title {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding-bottom: 0.5rem;
+        font-size: 1.25rem;
+        border-bottom: 0.063rem solid var(--tui-base-04);
     }
 
-    .message-container {
-        margin-bottom: 1rem;
-        min-height: 30%;
+    &__container,
+    &__message-container {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        overflow-y: auto;
+        gap: 1rem;
+        padding: 1.25rem;
+        border-radius: 0.5rem;
+        height: 100%;
+        background: var(--main-background);
+        box-shadow: var(--card-shadow);
+    }
+
+    &__container {
+        min-height: 60%;
+    }
+
+    &__error-message,
+    &__output {
+        padding: 0.938rem;
+        border-radius: 0.313rem;
+    }
+
+    &__error-message {
+        background: var(--error-background);
+    }
+
+    &__output {
+        background: var(--success-background);
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: left;
+        gap: 1rem;
+    }
+
+    &__footer {
+        border-top: 0.063rem solid var(--tui-base-04);
+        margin-top: auto;
+    }
+
+    @media (width <= 680px) {
+        &__container {
+            min-height: 65%;
+        }
+
+        &__message-container {
+            margin-bottom: 1rem;
+            min-height: 30%;
+        }
     }
 }
